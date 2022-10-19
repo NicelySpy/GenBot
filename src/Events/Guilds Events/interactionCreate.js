@@ -5,7 +5,7 @@ module.exports = {
   run: async (interaction, client) => {
     // Slash Command Handling
     if (interaction.isChatInputCommand()) {
-      const cmd = client.commands.get(interaction.commandName);
+      const cmd = client.commands.collection.get(interaction.commandName);
       if (!cmd) {
         return interaction.reply({
           embeds: [
@@ -72,7 +72,7 @@ module.exports = {
     }
     if (interaction.isContextMenuCommand()) {
       await interaction.deferReply({ ephemeral: false });
-      const command = client.slashCommands.get(interaction.commandName);
+      const command = client.contexts.collection.get(interaction.commandName);
       if (command) command.run({ client, interaction });
     }
   },

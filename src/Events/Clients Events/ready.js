@@ -12,7 +12,7 @@ module.exports = {
     //await this.application.commands.set(all);
     const port = 3000 || 3001 || 1232 || 6804;
     const status = [
-      `${client.config.prefix}help || ${client.user.tag}`,
+      `${client.user.tag}`,
       `${client.guilds.cache.size} servers!`,
       `${client.channels.cache.size} channels!`,
       `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} users!`,
