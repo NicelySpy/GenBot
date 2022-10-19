@@ -6,7 +6,7 @@ module.exports = {
     const all = [];
     client.commands.array.forEach((c) => all.push(c));
     client.contexts.array.forEach((c) => all.push(c));
-    const personalGuild = this.guilds.cache.get("1023607210149945436");
+    const personalGuild = client.guilds.cache.get("1023607210149945436");
     await personalGuild.commands.set(all);
     //await this.application.commands.set(all);
     const port = 3000 || 3001 || 1232 || 6804;
