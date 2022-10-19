@@ -62,10 +62,6 @@ class Spider extends Client {
     this.mongoURI = config.mongooseConnectionString;
     this.utils = new (require("@function/util.js"))();
     this.wait = require("node:util").promisify(setTimeout);
-    this.loadEvents();
-    this.loadCommands();
-    this.loadContexts();
-    this.antiCrash();
   }
 
   async loadFiles(dir) {
@@ -202,6 +198,13 @@ class Spider extends Client {
           chalk.white(`${error}`)
       )
     );
+  }
+  install() {
+    this.login(this.config.token);
+    this.loadEvents();
+    this.loadCommands();
+    this.loadContexts();
+    this.antiCrash();
   }
 }
 module.exports = { Spider };
