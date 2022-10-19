@@ -1,4 +1,5 @@
 const chalk = require("chalk");
+const { ActivityType } = require('discord.js')
 module.exports = {
   name: "ready",
   once: true,
@@ -20,7 +21,7 @@ module.exports = {
       client.user.setActivity(
         status[Math.floor(Math.random() * status.length)],
         {
-          type: "LISTENING",
+          type: ActivityType.Listening,
         }
       );
     }, 2500);
