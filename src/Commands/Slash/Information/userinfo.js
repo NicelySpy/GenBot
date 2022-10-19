@@ -9,7 +9,7 @@ module.exports = {
     .addUserOption((options) =>
       options.setName("target").setDescription("Select the target.")
     ),
-  run: async (interaction) => {
+  run: async ({ interaction }) => {
     const target =
       interaction.options.getMember("target") || interaction.member;
     const { user, presence, roles } = target;
@@ -174,7 +174,6 @@ module.exports = {
             { name: "Banner", value: user.bannerURL() ? "** **" : "🎏 None" }
           ),
       ],
-      ephemeral: true,
     });
   },
 };
