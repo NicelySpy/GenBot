@@ -1,6 +1,6 @@
 const { inspect } = require("util");
 const { clean, save } = require("../../src/Structures/Utils/string");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { create } = require("sourcebin");
 module.exports = {
   name: "eval",
@@ -21,7 +21,7 @@ module.exports = {
       if (typeof evaled !== "string") evaled = inspect(evaled);
       evaled = clean(evaled);
       evaled = save(evaled);
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setAuthor("Eval", message.author.avatarURL())
         .setColor("GREEN")
         .setTimestamp();

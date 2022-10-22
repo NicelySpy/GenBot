@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 
 const filterLevels = {
@@ -101,7 +101,7 @@ module.exports = {
         ? client.utils.trimArray(roles)
         : "None";
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setDescription(`**Guild information for __${message.guild.name}__**`)
       .setColor("BLUE")
       .setThumbnail(message.guild.iconURL({ dynamic: true }))

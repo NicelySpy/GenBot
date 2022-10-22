@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 const moment = require("moment");
 require("moment-duration-format");
@@ -43,11 +43,11 @@ module.exports = {
     if (ping >= 400) {
       color = red;
     }
-    const embed1 = new MessageEmbed()
+    const embed1 = new EmbedBuilder()
       .setDescription("🏓 | Pinging ...")
       .setColor("#6F8FAF");
 
-    const info = new MessageEmbed()
+    const info = new EmbedBuilder()
       .setTitle("🏓 | Pong!")
       .addField("API Latency", `${color2} | ${cPing}ms`, true)
       .addField("Message Latency", `${color} | ${ping}ms`, true)

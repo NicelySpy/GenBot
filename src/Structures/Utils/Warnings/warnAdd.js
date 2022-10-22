@@ -1,5 +1,5 @@
 const model = require("../../Models/warnModel");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 async function warningAdd(options = {}, message) {
   if (!options.reason) options.reason = "No Reason";
   if (!message)
@@ -67,7 +67,7 @@ async function warningAdd(options = {}, message) {
     reason: options.reason,
     timestamp: Date.now(),
   }).save();
-  const embed = new MessageEmbed()
+  const embed = new EmbedBuilder()
     .setTitle(options.dmEmbed.title)
     .setColor(options.dmEmbed.color)
     .setDescription(options.dmEmbed.description)

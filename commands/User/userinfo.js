@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 const axios = require("axios");
 
@@ -111,7 +111,7 @@ module.exports = {
       }
     });
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setColor("GREEN")
       .setAuthor({
         name: user.user.tag,

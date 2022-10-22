@@ -1,5 +1,5 @@
 const warnModel = require("../../src/Structures/Models/warnModel");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const moment = require("moment");
 module.exports = {
   name: "warn",
@@ -113,7 +113,7 @@ module.exports = {
           ].join("\n");
         })
         .join("\n\n");
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle(`${userTarget.tag}'s Warnings`)
         .setDescription(embedDescription)
         .setColor("RANDOM")

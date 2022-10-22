@@ -1,4 +1,4 @@
-const { MessageEmbed, version: djsversion } = require("discord.js");
+const { EmbedBuilder, version: djsversion } = require("discord.js");
 const { version } = require("../../package.json");
 const { utc } = require("moment");
 const os = require("os");
@@ -50,7 +50,7 @@ module.exports = {
         process.memoryUsage().heapUsed
       )}`,
     ].join("\n");
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setThumbnail(client.user.displayAvatarURL())
       .setColor(message.guild.me.displayHexColor || "BLUE")
       .addField("General", `${general}`)

@@ -1,5 +1,5 @@
 const {
-  MessageEmbed,
+  EmbedBuilder,
   MessageActionRow,
   MessageSelectMenu,
 } = require("discord.js");
@@ -46,7 +46,7 @@ module.exports = {
           setTimeout(() => msg.delete(), 3000);
         });
       } else if (cmds) {
-        const hh = new MessageEmbed()
+        const hh = new EmbedBuilder()
           .setTitle(`${formatString(cmds.name)} commands`)
           .setDescription(
             `Information about ${formatString(
@@ -95,7 +95,7 @@ module.exports = {
         message.channel.send({ embeds: [hh] });
       }
     } else {
-      const embed = new MessageEmbed().setDescription(
+      const embed = new EmbedBuilder().setDescription(
         "**Hello!**,\nType ```help [cmd | aliases]``` to know more detail of that command\nMentions me if you didn't know my prefix!"
       );
 
@@ -131,7 +131,7 @@ module.exports = {
         const category = categories.find(
           (x) => x.directory.toLowerCase() === directory
         );
-        const categoryEmbed = new MessageEmbed()
+        const categoryEmbed = new EmbedBuilder()
           .setTitle(`${formatString(directory)} Commands`)
           .setDescription(
             `This is an all commands of ${formatString(directory)}! \n`
