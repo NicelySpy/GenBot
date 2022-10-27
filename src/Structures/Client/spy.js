@@ -201,10 +201,17 @@ class Spider extends Client {
   }
   install() {
     this.login(this.config.token);
-    this.loadEvents();
-    this.loadCommands();
-    this.loadContexts();
     this.antiCrash();
+    this.loadCommands();
+    this.loadEvents();
+    this.loadContexts();
   }
 }
 module.exports = { Spider };
+
+
+
+
+
+
+

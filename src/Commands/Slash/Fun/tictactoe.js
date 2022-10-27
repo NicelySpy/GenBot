@@ -56,7 +56,7 @@ module.exports = {
   run: async ({ interaction }) => {
     const opponent = interaction.options.getMember("opponent");
     let turn = interaction.member;
-    let sign = X;
+    let sign = 'X';
     let pip = [];
     for (i = 0; i <= 8; i++) {
       pip.push(
@@ -129,7 +129,7 @@ module.exports = {
       pip[parseInt(i.customId)]
         .setEmoji(emojis[sign])
         .setDisabled(true)
-        .setLabel("");
+        .setLabel(" ");
       if (checkWin(pip, sign)) {
         pip.forEach((btn) => btn.setDisabled(true));
 

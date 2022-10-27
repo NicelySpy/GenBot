@@ -2,9 +2,9 @@ const { EmbedBuilder, WebhookClient } = require("discord.js");
 
 function errLogger(content, err) {
   let loggerWebhook = new WebhookClient({
-    id: "1023612429281787954",
+    id: "1035108164531650600",
     token:
-      "EGqooh4bd1aBTAf1Yoro7UzKkTn9SlApRxV9csJFrf7LwD9-6flapfRBd4MTCKc7EQJi",
+      "HGFfJ1sGYFQ_VPxLdC0t46TS6kKODWLPVLhIJFYZYJmGL8BULS1gDbTdKJWf4HHw7O4V",
   });
   if (!content && !err) return;
   const errString = err?.stack || err;
