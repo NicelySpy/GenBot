@@ -10,7 +10,7 @@ const { connection } = require("mongoose");
 const os = require("os");
 
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("statistics")
     .setDescription("Displays the status of the client and database."),
   run: async ({ client, interaction }) => {

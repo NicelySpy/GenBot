@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
 module.exports = {
-  ...new Discord.SlashCommandBuilder()
+  data: new Discord.SlashCommandBuilder()
     .setName("colour")
     .setDescription("Showing an information from the colours")
     .addStringOption((options) =>
@@ -16,13 +16,14 @@ module.exports = {
       color = interaction.options.getString("hex-color").split("#")[1];
     }
     const url = `https://api.alexflipnote.dev/colour/${color}`;
+    await interaction.deferReply();
     let json;
     try {
       json = await fetch(url).then((res) => res.json());
     } catch (e) {
-      return interaction.reply({
+      return interaction.editReply({
         embeds: [
-          new EmbedBuilder()
+          new Discord.EmbedBuilder()
             .setColor("Red")
             .setDescription("An error has occured"),
         ],
@@ -30,22 +31,26 @@ module.exports = {
       });
     }
     if (json.description)
-      return interaction.reply({
+      return interaction.editReply({
         embeds: [
-          new EmbedBuilder().setColor("Red").setDescription("Invalid color!"),
+          new Discord.EmbedBuilder()
+            .setColor("Red")
+            .setDescription("Invalid color!"),
         ],
         ephemeral: true,
       });
     let embed = new Discord.EmbedBuilder()
       .setTitle(json.name)
-      .setColor(json.hex)
+      .setColor(json.rgb.values)
       .addFields(
-        { name: "RGB", value: `${json.rgb}`, inline: true },
+        { name: "RGB", value: `${json.rgb.string}`, inline: true },
         { name: "Brightness", value: `${json.brightness}`, inline: true },
-        { name: "Hex", value: `${json.hex}`, inline: true }
+        { name: "Hex", value: `${json.hex.string}`, inline: true },
+        { name: "HSL", value: `${json.hsl.string}`, inline: true },
+        { name: "CMYK", value: `${json.cmyk.string}`, inline: true }
       )
-      .setThumbnail(json.image)
-      .setImage(json.image_gradient, true);
-    interaction.reply({ embeds: [embed], ephemeral: false });
+      .setThumbnail(json.images.square)
+      .setImage(json.images.gradient, true);
+    interaction.editReply({ embeds: [embed], ephemeral: false });
   },
 };

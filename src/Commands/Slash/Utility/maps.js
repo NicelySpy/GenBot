@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
 module.exports = {
-  ...new Discord.SlashCommandBuilder()
+  data: new Discord.SlashCommandBuilder()
     .setName("maps")
     .setDescription("Showing the google maps image")
     .addStringOption((options) =>

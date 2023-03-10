@@ -4,7 +4,7 @@ const {
   PermissionFlagsBits,
 } = require("discord.js");
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("ban")
     .setDescription("Ban members")
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
@@ -29,8 +29,7 @@ module.exports = {
             .setDescription("The user id")
             .setRequired(true)
         )
-    )
-    .toJSON(),
+    ),
   run: async ({ interaction }) => {
     const target = interaction.options.getMember("user");
     const reason = interaction.options.getString("reason") || "No reason";
@@ -86,27 +85,26 @@ module.exports = {
           });
         }
         break;
-      case "delete":
-        {
-          await interaction.guild.members.unban(userid).then((user) => {
-            user.send({
-              embeds: [
-                new EmbedBuilder()
-                  .setColor("Red")
-                  .setDescription(
-                    `You has been banned from ${interaction.guild.name}, ${reason}`
-                  ),
-              ],
-            });
-            interaction.reply({
-              embeds: [
-                new EmbedBuilder()
-                  .setColor("Green")
-                  .setDescription(`Unbanned ${user.user.tag}`),
-              ],
-            });
+      case "delete": {
+        await interaction.guild.members.unban(userid).then((user) => {
+          user.send({
+            embeds: [
+              new EmbedBuilder()
+                .setColor("Red")
+                .setDescription(
+                  `You has been unbanned from ${interaction.guild.name}, ${reason}`
+                ),
+            ],
           });
-        }
+          interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setColor("Green")
+                .setDescription(`Unbanned ${user.user.tag}`),
+            ],
+          });
+        });
+      }
     }
   },
 };

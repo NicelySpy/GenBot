@@ -3,7 +3,7 @@ const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 const answers = ["heads", "tails"];
 
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("coinflip")
     .setDescription("Heads or tails?")
     .addStringOption((options) =>

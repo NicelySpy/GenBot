@@ -1,8 +1,7 @@
-const { errLogger } = require("@function/logger.js");
 const { EmbedBuilder } = require("discord.js");
 module.exports = {
   name: "interactionCreate",
-  run: async (interaction, client) => {
+  run: async (client, interaction) => {
     // Slash Command Handling
     if (interaction.isChatInputCommand()) {
       const cmd = client.commands.collection.get(interaction.commandName);
@@ -67,13 +66,16 @@ module.exports = {
         });
       cmd
         .run({ client, interaction })
-        .catch((err) => errLogger("CommandError", err));
+        .catch((err) => client.errLogger("CommandError", err));
       console.log("Someone has using /" + interaction.commandName);
     }
     if (interaction.isContextMenuCommand()) {
-      await interaction.deferReply({ ephemeral: false });
       const command = client.contexts.collection.get(interaction.commandName);
-      if (command) command.run({ client, interaction });
+      if (command)
+        command
+          .run({ client, interaction })
+          .catch((err) => client.errLogger("CommandError", err));
+      console.log("Someone has using " + interaction.commandName);
     }
   },
 };

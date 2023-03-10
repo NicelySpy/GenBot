@@ -1,17 +1,18 @@
-const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
+const {
+  ContextMenuCommandBuilder,
+  EmbedBuilder,
+  ApplicationCommandType,
+} = require("discord.js");
 module.exports = {
-  data: new SlashCommandBuilder()
+  data: new ContextMenuCommandBuilder()
     .setName("avatar")
-    .setDescription("Showing the user avatar")
-    .addUserOption((options) =>
-      options.setName("user").setDescription("Who is the user?")
-    ),
-  run: ({ interaction }) => {
-    const target = interaction.options.getMember("user") || interaction.member;
+    .setType(ApplicationCommandType.User),
+  run: async ({ client, interaction }) => {
+    const target = await client.users.fetch(interaction.targetId);
     interaction.reply({
       embeds: [
         new EmbedBuilder()
-          .setTitle(`${target.user.tag}'s Avatar`)
+          .setTitle(`${target.tag}'s Avatar`)
           .setURL(
             target.displayAvatarURL({
               format: "png",

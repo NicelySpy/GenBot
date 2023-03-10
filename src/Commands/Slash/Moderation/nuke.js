@@ -4,7 +4,7 @@ const {
   PermissionFlagsBits,
 } = require("discord.js");
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("nuke")
     .setDescription("Will delete all the messages.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels),

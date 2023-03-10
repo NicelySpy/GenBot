@@ -2,7 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const axios = require("axios");
 
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("animals")
     .setDescription("Showing animals picture")
     .addStringOption((options) =>
@@ -11,16 +11,16 @@ module.exports = {
         .setDescription("The name.")
         .setRequired(true)
         .setChoices(
-          { name: "Bird", value: "bird" },
-          { name: "Cat", value: "cat" },
-          { name: "Dog", value: "dog" },
-          { name: "Fox", value: "fox" },
-          { name: "Kangaroo", value: "kangaroo" },
-          { name: "Koala", value: "koala" },
-          { name: "Panda", value: "panda" },
-          { name: "Raccoon", value: "raccoon" },
-          { name: "Redpanda", value: "red_panda" },
-          { name: "Random", value: "random" }
+          { name: "Bird 🐦", value: "bird" },
+          { name: "Cat 🐱", value: "cat" },
+          { name: "Dog 🐶", value: "dog" },
+          { name: "Fox 🦊", value: "fox" },
+          { name: "Kangaroo 🦘", value: "kangaroo" },
+          { name: "Koala 🐨", value: "koala" },
+          { name: "Panda 🐼", value: "panda" },
+          { name: "Raccoon 🦝", value: "raccoon" },
+          { name: "Redpanda 🐼", value: "red_panda" },
+          { name: "Random 🎲", value: "random" }
         )
     ),
   run: async ({ interaction }) => {

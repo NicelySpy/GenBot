@@ -1,5 +1,5 @@
 const chalk = require("chalk");
-const { ActivityType } = require('discord.js')
+const { ActivityType } = require("discord.js");
 module.exports = {
   name: "ready",
   once: true,
@@ -7,9 +7,10 @@ module.exports = {
     const all = [];
     client.commands.array.forEach((c) => all.push(c));
     client.contexts.array.forEach((c) => all.push(c));
+
     const personalGuild = client.guilds.cache.get("1023607210149945436");
     await personalGuild.commands.set(all);
-    //await this.application.commands.set(all);
+    //await client.application.commands.set(all);
     const port = 3000 || 3001 || 1232 || 6804;
     const status = [
       `${client.user.tag}`,

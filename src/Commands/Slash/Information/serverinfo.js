@@ -8,7 +8,7 @@ const {
 } = require("discord.js");
 
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("serverinfo")
     .setDescription("Displays information about the server."),
   run: async ({ interaction }) => {

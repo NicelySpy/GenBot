@@ -3,7 +3,7 @@ const jaro = require("jaro-winkler");
 const Discord = require("discord.js");
 
 module.exports = {
-  ...new Discord.SlashCommandBuilder()
+  data: new Discord.SlashCommandBuilder()
     .setName("covid")
     .setDescription("Get the Covid-19 statistics")
     .addStringOption((options) =>

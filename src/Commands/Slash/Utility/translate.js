@@ -1,29 +1,21 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 const translate = require("@iamtraction/google-translate");
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("translate")
-    .setDescription("Google translate")
+    .setDescription("Translate any text to english")
     .addStringOption((options) =>
       options
         .setName("query")
         .setDescription("The text to translate")
         .setRequired(true)
-    )
-    .addStringOption((options) =>
-      options
-        .setName("language")
-        .setDescription("The Language")
-        .setRequired(true)
     ),
   run: async ({ interaction }) => {
     const query = interaction.options.getString("query");
-    const language = interaction.options.getString("language");
     try {
-      const translated = await translate(query, { to: language });
+      const translated = await translate(query, { to: "en" });
       const e = new EmbedBuilder()
-        .setColor("Green")
-        .setDescription("Text has been translated")
+        .setColor("Purple")
         .addFields([
           {
             name: "Content",
@@ -35,25 +27,11 @@ module.exports = {
             value: translated.text,
             inline: true,
           },
-          {
-            name: "Language",
-            value: `From: ${translated.from.language.iso} \nTo: ${args[0]}`,
-          },
         ])
-        .setTimestamp();
       interaction.reply({ embeds: [e] });
     } catch (err) {
-      console.log(err);
-      interaction.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setColor("Red")
-            .setDescription(
-              "Error!, This might can happends if u put invalid language!"
-            ),
-        ],
-        ephemeral: true,
-      });
+      client.errLogger("CommandError", err)
+      //console.error("/translate:" + err);
     }
   },
 };

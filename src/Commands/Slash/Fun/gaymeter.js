@@ -1,8 +1,8 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 module.exports = {
-  ...new SlashCommandBuilder()
-    .setName("gaycalc")
-    .setDescription("Measure how gay he is?")
+  data: new SlashCommandBuilder()
+    .setName("gaymeter")
+    .setDescription("How gay he is?")
     .addUserOption((options) =>
       options.setName("user").setDescription("Who is the user?")
     ),
@@ -17,8 +17,8 @@ module.exports = {
       embeds: [
         new EmbedBuilder()
           .setColor("Random")
-          .setTitle("Counting Succsesfull!")
-          .setDescription(`<@${target.id}>'s Gay test result is ${res}`),
+          .setTitle("Is he a gay?")
+          .setDescription(`<@${target.id}>'s Gay test result is ${res}🏳️‍🌈🏳️‍🌈`),
       ],
     });
   },

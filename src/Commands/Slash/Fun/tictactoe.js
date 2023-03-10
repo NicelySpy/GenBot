@@ -1,4 +1,4 @@
-const {
+/** const {
   EmbedBuilder,
   ActionRowBuilder,
   ButtonBuilder,
@@ -56,7 +56,7 @@ module.exports = {
   run: async ({ interaction }) => {
     const opponent = interaction.options.getMember("opponent");
     let turn = interaction.member;
-    let sign = 'X';
+    let sign = "X";
     let pip = [];
     for (i = 0; i <= 8; i++) {
       pip.push(
@@ -179,3 +179,4 @@ module.exports = {
     });
   },
 };
+*/

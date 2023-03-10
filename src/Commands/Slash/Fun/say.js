@@ -1,5 +1,5 @@
 module.exports = {
-  ...new (require("discord.js").SlashCommandBuilder)()
+  data: new (require("discord.js").SlashCommandBuilder)()
     .setName("say")
     .setDescription("Will saying the word/s")
     .addStringOption((options) =>

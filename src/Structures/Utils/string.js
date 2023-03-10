@@ -14,7 +14,10 @@ function clean(text) {
 function save(text) {
   return (text = String(text)
     .replace(
-      new RegExp(client.config.token.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&"), "gi"),
+      new RegExp(
+        client.config.token.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&"),
+        "gi"
+      ),
       "*****"
     )
     .replace(

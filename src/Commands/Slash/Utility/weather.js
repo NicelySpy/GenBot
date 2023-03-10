@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const weather = require("weather-js");
 
 module.exports = {
-  ...new Discord.SlashCommandBuilder()
+  data: new Discord.SlashCommandBuilder()
     .setName("weather")
     .setDescription("Weather command")
     .addStringOption((options) =>

@@ -2,7 +2,7 @@ const got = require("got");
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("meme")
     .setDescription("Post the meme from reddit"),
   run: async ({ interaction }) => {

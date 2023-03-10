@@ -5,7 +5,7 @@ const {
 } = require("discord.js");
 
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("purge")
     .setDescription(
       "Purge a specific amount of messages from a target or channel."
@@ -49,8 +49,7 @@ module.exports = {
             .setMinValue(1)
             .setRequired(true)
         )
-    )
-    .toJSON(),
+    ),
   run: async ({ client, interaction }) => {
     let amount = interaction.options.getInteger("count");
     if (amount > 100) amount = 100;

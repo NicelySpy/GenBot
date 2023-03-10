@@ -4,7 +4,7 @@ const {
   PermissionFlagsBits,
 } = require("discord.js");
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("kick")
     .setDescription("Kick members")
     .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)

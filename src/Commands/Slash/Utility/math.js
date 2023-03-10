@@ -1,7 +1,7 @@
 const math = require("mathjs");
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("math")
     .setDescription("Helps your math home")
     .addStringOption((options) =>

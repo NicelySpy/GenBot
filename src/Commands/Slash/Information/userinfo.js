@@ -1,7 +1,7 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("userinfo")
     .setDescription(
       "Displays the available information about the specified target."

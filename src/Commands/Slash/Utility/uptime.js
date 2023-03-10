@@ -1,6 +1,6 @@
 const ms = require("ms");
 module.exports = {
-  ...new (require("discord.js").SlashCommandBuilder)()
+  data: new (require("discord.js").SlashCommandBuilder)()
     .setName("uptime")
     .setDescription("Showing how long the bot uptime"),
   run: async ({ client, interaction }) => {

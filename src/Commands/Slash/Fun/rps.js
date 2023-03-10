@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const rps = ["scissors", "rock", "paper"];
 const res = ["Scissors ✌", "Rock 👊", "Paper ✋"];
 module.exports = {
-  ...new Discord.SlashCommandBuilder()
+  data: new Discord.SlashCommandBuilder()
     .setName("rps")
     .setDescription("Plays rock paper scissor with me!!")
     .addStringOption((options) =>

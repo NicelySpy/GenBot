@@ -1,6 +1,6 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 module.exports = {
-  ...new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("lovemeter")
     .setDescription("Counting a lovemeter with a target & target")
     .addUserOption((options) =>
