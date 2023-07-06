@@ -8,13 +8,15 @@ module.exports = {
       options.setName("input").setDescription("Math question").setRequired(true)
     ),
   run: async ({ client, interaction }) => {
-    const p = interaction.options.getString("input");
+    await interaction.deferReply();
+    const q = interaction.options.getString("input");
+    let p = q.replace("×", "*").replace("÷", "/");
     const h = math.evaluate(p);
     try {
       const ha = new EmbedBuilder().setTitle("Calculated!").addFields([
         {
           name: "Input",
-          value: `${p}`,
+          value: `${q}`,
           inline: true,
         },
         {
@@ -23,16 +25,13 @@ module.exports = {
           inline: true,
         },
       ]);
-      await interaction.reply("Calculating..");
-      await client.wait(2000);
       await interaction.editReply({
-        content: "Calculated!",
         embeds: [ha],
         ephemeral: false,
       });
     } catch (err) {
-      console.log(err);
-      interaction.reply({
+      throw err;
+      interaction.editReply({
         embeds: [
           new EmbedBuilder()
             .setColor("Red")

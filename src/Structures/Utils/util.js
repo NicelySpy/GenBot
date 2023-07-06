@@ -1,3 +1,4 @@
+const fetch = require("node-fetch");
 module.exports = class Util {
   constructor(client) {
     client = client;
@@ -43,5 +44,13 @@ module.exports = class Util {
     return new Intl.ListFormat("en-GB", { style: "short", type: type }).format(
       array
     );
+  }
+  async getColourData(hex) {
+    hex = hex.includes("#") ? hex.split("#")[1] : hex;
+    let data = await fetch(`https://api.alexflipnote.dev/colour/${hex}`).then(
+      (res) => res.json()
+    );
+    if (data.description) throw new TypeError("Invalid hex colour.");
+    return data;
   }
 };

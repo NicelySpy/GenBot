@@ -28,17 +28,15 @@ module.exports = {
           const extension = banner.startsWith("a_") ? ".gif" : ".png";
           const url = `https://cdn.discordapp.com/banners/${user.id}/${banner}${extension}`;
           const embed = new Embed()
-            .setDescription(`${user.tag}s banner`)
+            .setDescription(`[${user.tag}s banner](${url})`)
             .setImage(url)
-            .setColor(accent_color || "RED");
+            .setColor(accent_color || "Random");
           {
           }
           message.channel.send({ embeds: [embed] });
         } else if (accent_color) {
           const embed = new Embed()
-            .setDescription(
-              `${user.tag} Tidak Memiliki Banner Kostum, Dia Hanya Mempunyai Accent Color`
-            )
+            .setDescription(`${user.tag}'s Accent color`)
             .setColor(accent_color);
 
           message.channel.send({ embeds: [embed] });

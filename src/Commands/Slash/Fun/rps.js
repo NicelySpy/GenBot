@@ -1,64 +1,106 @@
 const Discord = require("discord.js");
-const rps = ["scissors", "rock", "paper"];
-const res = ["Scissors ✌", "Rock 👊", "Paper ✋"];
+const rps = [null, "scissors", "rock", "paper"];
+const res = [null, "Scissors ✌", "Rock 👊", "Paper ✋"];
 module.exports = {
   data: new Discord.SlashCommandBuilder()
     .setName("rps")
-    .setDescription("Plays rock paper scissor with me!!")
-    .addStringOption((options) =>
+    .setDescription("Plays rock paper scissor someone")
+    .addUserOption((options) =>
       options
-        .setName("choice")
-        .setDescription("Choice")
+        .setName("opponent")
+        .setDescription("Your opponent.")
         .setRequired(true)
-        .setChoices(
-          { name: "Scissors ✌", value: "scissors" },
-          { name: "Rock 👊", value: "rock" },
-          { name: "Paper ✋", value: "paper" }
-        )
     ),
   run: async ({ client, interaction }) => {
-    let userChoice;
-    userChoice = interaction.options.getString("choice")?.toLowerCase();
-    userChoice = rps.indexOf(userChoice);
-
-    const botChoice = Math.floor(Math.random() * 3);
-    let result;
-
-    if (userChoice === botChoice) {
-      result = "It's a draw no one wins";
-    } else if (
-      (botChoice === 2 && userChoice === 1) ||
-      (botChoice === 1 && userChoice === 0) ||
-      (botChoice === 0 && userChoice === 2)
-    ) {
-      result = `**${client.user.username}** Wins`;
-    } else {
-      result = `**${interaction.member.displayName}** Wins nice my dude !!`;
-    }
-
-    const embed = new Discord.EmbedBuilder()
-      .setTitle(
-        `${interaction.member.displayName} vs ${client.user.username} **RPS**`
-      )
-      .addFields(
-        {
-          name: `${interaction.member.displayName}`,
-          value: `${res[userChoice]}`,
-          inline: true,
-        },
-        {
-          name: `${client.user.username}`,
-          value: `${res[botChoice]}`,
-          inline: true,
-        },
-        { name: "Result", value: `${result}` }
-      )
+    let userChoice = null;
+    let opponentChoice = null;
+    const player = {
+      user: interaction.member,
+      opponent: interaction.options.getMember("opponent"),
+    };
+    //if(player.user.id == player.opponent.id) return interaction.reply({ content: "You can't play with yourself.", ephemeral: true })
+    let components = [
+      new Discord.ActionRowBuilder().addComponents([
+        new Discord.ButtonBuilder()
+          .setLabel("✌️")
+          .setCustomId("scissors")
+          .setStyle(Discord.ButtonStyle.Primary),
+        new Discord.ButtonBuilder()
+          .setLabel("👊")
+          .setCustomId("rock")
+          .setStyle(Discord.ButtonStyle.Primary),
+        new Discord.ButtonBuilder()
+          .setLabel("🤚")
+          .setCustomId("paper")
+          .setStyle(Discord.ButtonStyle.Primary),
+      ]),
+    ];
+    let embed = new Discord.EmbedBuilder()
+      .setTitle("🔥RPS Battle🔥")
+      .setDescription(`${player.user} VS ${player.opponent}`)
+      .setColor("Orange")
       .setFooter({
-        text: `Challenged by ${interaction.member.displayName}`,
-        iconURL: interaction.member.displayAvatarURL({ dynamic: true }),
-      })
-      .setTimestamp()
-      .setColor("Random");
-    interaction.reply({ embeds: [embed] });
+        text: "Can be used for the next 3 min!",
+      });
+    const msg = await interaction.reply({
+      embeds: [embed],
+      components,
+      fetchReply: true,
+    });
+    const collector = msg.createMessageComponentCollector({
+      filter: (b) => {
+        if (b.user.id !== player.user.id && b.user.id !== player.opponent.id)
+          return b.reply({
+            content: "You can only watch this battle!",
+            ephemeral: true,
+          });
+        else return true;
+      },
+      time: 180000,
+    });
+    collector.on("collect", async (btn) => {
+      await btn.deferUpdate();
+      if (btn.user.id == player.user.id && !userChoice) {
+        userChoice = rps.indexOf(btn.customId);
+        btn.followUp({
+          content: `You choosing ${res[userChoice]}.`,
+          ephemeral: true,
+        });
+      } else if (btn.user.id == player.opponent.id && !opponentChoice) {
+        opponentChoice = rps.indexOf(btn.customId);
+        btn.followUp({
+          content: `You choosing ${res[opponentChoice]}.`,
+          ephemeral: true,
+        });
+      }
+	    console.log(userChoice, opponentChoice)
+      if (userChoice && opponentChoice) return collector.stop();
+    });
+    collector.on("end", async () => {
+      msg.edit({
+        embeds: [
+          embed
+            .setDescription(
+              `${player.user}: ${res[userChoice] ?? "??"}\nVS\n${
+                player.opponent
+              }: ${res[opponentChoice] ?? "??"}`
+            )
+            .addFields({
+              name: "Result",
+              value: `${checkWin(userChoice - 1, opponentChoice - 1)}`,
+            }),
+        ],
+        components: [],
+      });
+    });
+    function checkWin(a, b) {
+      let result;
+      if ((a == 2 && b == 1) || (a == 1 && b == 0) || (a == 0 && b == 2))
+        result = `${player.user} Wins🔥`;
+      else if ((a == 0 && b == 1) || (a == 1 && b == 2) || (a == 2 && b == 0))
+        result = `${player.opponent} Wins🔥`;
+      else if (a == b || !a || !b) result = "Tie! No one wins..😥";
+      return result;
+    }
   },
 };

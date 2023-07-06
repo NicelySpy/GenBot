@@ -10,35 +10,10 @@ module.exports = {
         .setDescription("The hex color (with # or without #)")
         .setRequired(true)
     ),
-  run: async ({ interaction }) => {
+  run: async ({ client, interaction }) => {
     let color = interaction.options.getString("hex-color");
-    if (color.includes("#")) {
-      color = interaction.options.getString("hex-color").split("#")[1];
-    }
-    const url = `https://api.alexflipnote.dev/colour/${color}`;
     await interaction.deferReply();
-    let json;
-    try {
-      json = await fetch(url).then((res) => res.json());
-    } catch (e) {
-      return interaction.editReply({
-        embeds: [
-          new Discord.EmbedBuilder()
-            .setColor("Red")
-            .setDescription("An error has occured"),
-        ],
-        ephemeral: true,
-      });
-    }
-    if (json.description)
-      return interaction.editReply({
-        embeds: [
-          new Discord.EmbedBuilder()
-            .setColor("Red")
-            .setDescription("Invalid color!"),
-        ],
-        ephemeral: true,
-      });
+    let json = await client.utils.getColourData(color);
     let embed = new Discord.EmbedBuilder()
       .setTitle(json.name)
       .setColor(json.rgb.values)
