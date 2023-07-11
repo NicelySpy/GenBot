@@ -1,20 +1,28 @@
 {
-  "name": "nodejs",
+  "name": "genbot-wa-x",
+  "type": "module",
+  "dependencies": {
+    "@adiwajshing/baileys": "npm:baileys@6.0.1",
+    "awesome-phonenumber": "^5.10.0",
+    "file-type": "^18.5.0",
+    "node-fetch": "^3.3.1",
+    "yargs": "^17.7.2"
+  },
+  "description": "My Whatsapp Bot",
   "version": "1.0.0",
-  "description": "Hello",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicelySpy/GenBot.git"
+  },
   "author": "GenKyy",
   "license": "ISC",
-  "dependencies": {
-    "@adiwajshing/baileys": "npm:baileys@6.0.9",
-    "@types/node": "^18.0.6",
-    "git": "^0.1.5",
-    "node-fetch": "^3.2.6"
+  "bugs": {
+    "url": "https://github.com/NicelySpy/GenBot/issues"
   },
-  "repository": "https://github.com/NicelySpy/GenBot.git",
-  "private": true
+  "homepage": "https://github.com/NicelySpy/GenBot#readme",
+  "keywords": []
 }
