@@ -19,21 +19,26 @@ const {
  import { fileTypeFromBuffer } from "file-type"; 
  import util, { format } from "util"; 
  import { fileURLToPath } from "url"; 
-  
+ import { 
+   logic, 
+   prototype, 
+   isNumber, 
+   getRandom, 
+   nullish 
+ } from "../myfunction.js";
+
  const __dirname = path.dirname(fileURLToPath(import.meta.url)); 
-  
+ 
  export class WhatsappBot { 
    constructor(connectionOptions, options = {}) { 
      this.opts = new Object( 
        yargs(process.argv.slice(2)).exitProcess(false).parse() 
      ); 
-  
-     if (!connectionOptions) 
-       throw new TypeError("Cannot launch the connection!"); 
-     else 
-       !this.opts["legacy"] 
-         ? _makeWaSocket(connectionOptions) 
-         : makeWALegacySocket(connectionOptions); 
+
+     connectionOptions = connectionOptions || {};
+     (this.opts["legacy"] 
+         ? _makeWaSocket
+         : makeWALegacySocket)(connectionOptions); 
      //this.conn = this; 
      //this.opts = opts; 
   
@@ -899,26 +904,7 @@ const {
      }); 
    } 
  } 
-  
- export function logic(check, inp, out) { 
-   if (inp.length !== out.length) 
-     throw new Error("Input and Output must have same length"); 
-   for (let i in inp) if (util.isDeepStrictEqual(check, inp[i])) return out[i]; 
-   return null; 
- } 
-  
- export function protoType() { 
-   Buffer.prototype.toArrayBuffer = function toArrayBufferV2() { 
-     const ab = new ArrayBuffer(this.length); 
-     const view = new Uint8Array(ab); 
-     for (let i = 0; i < this.length; ++i) { 
-       view[i] = this[i]; 
-     } 
-     return ab; 
-   }; 
-   /** 
-    * @returns {ArrayBuffer} 
-    */ 
+
    Buffer.prototype.toArrayBufferV2 = function toArrayBuffer() { 
      return this.buffer.slice( 
        this.byteOffset, 
