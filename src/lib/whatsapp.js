@@ -9,7 +9,7 @@ const {
   generateWAMessageFromContent,
   WAMessageStubType,
   extractMessageContent,
-} = (await import("@adiwajshing/baileys")).default;
+} = (await import("baileys")).default;
 
 import fs from "fs";
 import path from "path";

@@ -8,7 +8,7 @@ const {
   jidDecode,
   areJidsSameUser,
   extractMessageContent,
-} = (await import("@adiwajshing/baileys")).default;
+} = (await import("baileys")).default;
 
 export function smsg(conn, m, hasParent) {
   if (!m) return m;
