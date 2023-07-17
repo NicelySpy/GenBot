@@ -115,7 +115,16 @@ export class WhatsappBot {
     }
   }
   this.group = {
-  
+    metadata: conn.groupMetadata,
+    create: conn.groupCreate,
+    leave: conn.groupLeave,
+    invite: {
+      getCode: conn.groupInviteCode
+    },
+    update: {
+      subject: conn.groupUpdateSubject,
+      description: conn.groupUpdateDescription
+    }
   }
 
 		this.opts = new Object(
