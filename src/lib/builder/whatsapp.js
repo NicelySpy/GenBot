@@ -91,7 +91,24 @@ export class WhatsappBot {
   this.groupToggleMembershipApprovalMode = conn.groupToggleMembershipApprovalMode
   this.groupFetchAllParticipating = conn.groupFetchAllParticipating
   this.getPrivacyToken = conn.getPrivacyToken
-  
+  this.assertSession = conn.assertSession
+  this.relayMessage = conn.relayMessage
+  this.sendReceipt = conn.sendReceipt
+  this.sendReceipts = conn.sendReceipts
+  this.readMessages = conn.readMessages
+  this.refreshMediaConn = conn.refreshMediaConn
+  this.waUploadToServer = conn.waUploadToServer
+  this.uploadMediaMessage = conn.uploadMediaMessage
+  this.sendMessage = conn.sendMessage
+  this.sendMessageAck = conn.sendMessageAck
+  this.sendRetryRequest = conn.sendRetryRequest
+  this.rejectCall = conn.rejectCall
+  this.getOrderDetails = conn.getOrderDetails
+  this.getCatalog = conn.getCatalog
+  this.getCollections = conn.getCollections
+  this.productCreate = conn.productCreate
+  this.productDelete = conn.productDelete
+  this.productUpdate = conn.productUpdate
 
 		this.opts = new Object(
 			yargs(process.argv.slice(2)).exitProcess(false).parse()
