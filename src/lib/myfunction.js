@@ -12,7 +12,8 @@ export function protoType() {
       for (let i = 0; i < this.length; ++i) {  
         view[i] = this[i];  
       }  
-      return ab;  
+      return ab;
+		}
 }; 
     
 export function isNumber() { 
@@ -33,7 +34,7 @@ export function getRandom() {
   */ 
 export function nullish(args) { 
    return !(args !== null && args !== undefined); 
- } 
+ }
   
  // TypeError: Cannot read properties of null (reading 'user') 
  //     at WebMessageInfo.get (file:///home/container/lib/simple.js:888:70) 
