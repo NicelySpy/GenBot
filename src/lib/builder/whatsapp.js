@@ -32,13 +32,31 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export class WhatsappBot {
 	constructor(connOpts = {}, opts = {}) {
 		let conn = _makeWaSocket(connOpts);
-		conn.connOpts = opts;
+		this.connOpts = opts
+  this.type = conn.type
+  this.ws = conn.ws
+  this.ev = conn.ev
+  this.authState = conn.authState
+  this.signalRepository = conn.signalRepository
+  this.user = conn.user
+  this.generateMessageTag = conn.generateMessageTag
+  this.query = conn.query
+  this.waitForMessage = conn.waitForMessage
+  this.waitForSocketOpen = conn.waitForSocketOpen
+  this.sendRawMessage = conn.sendRawMessage
+  this.sendNode = conn.sendNode
+  this.logout = conn.logout
+  this.end = conn.end
+  this.onUxpectedError = conn.onUxpectedError
+  this.uploadPreKeys = conn.uploadPreKeys
+  this.uploadPreKeysToServerIfRequired = conn.uploadPreKeysToServerIfRequired
+  this.waitForConnectionUpdate = conn.waitForConnectionUpdate
+  this.processingMutex = conn.processingMutex
 
 		this.opts = new Object(
 			yargs(process.argv.slice(2)).exitProcess(false).parse()
 		);
-		this.conn = conn || this
-		this.chats = { ...(this.conn.connOpts.chats || {}) };
+		this.chats = { ...(this.connOpts.chats || {}) };
 	}
 
 }
