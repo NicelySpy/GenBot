@@ -52,6 +52,46 @@ export class WhatsappBot {
   this.uploadPreKeysToServerIfRequired = conn.uploadPreKeysToServerIfRequired
   this.waitForConnectionUpdate = conn.waitForConnectionUpdate
   this.processingMutex = conn.processingMutex
+  this.fetchPrivacySetting = conn.fetchPrivacySetting
+  this.upsertMessage = conn.upsertMessage
+  this.appPatch = conn.appPatch
+  this.sendPresenceUpdate = conn.sendPresenceUpdate
+  this.presenceSubscribe = conn.presenceSubscribe
+  this.profilePictureUrl = conn.profilePictureUrl
+  this.onWhatsapp = conn.onWhatsapp
+  this.fetchBlocklist = conn.fetchBlocklist
+  this.fetchStatus = conn.fetchStatus
+  this.updateProfilePicture = conn.updateProfilePicture
+  this.removeProfilePicture = conn.removeProfilePicture
+  this.updateProfileStatus = conn.updateProfileStatus
+  this.updateProfileName = conn.updateProfileName
+  this.updateBlockStatus = conn.updateBlockStatus
+  this.updateLastSeenPrivacy = conn.updateLastSeenPrivacy
+  this.updateOnlinePrivacy = conn.updateLastSeenPrivacy
+  this.updateProfilePicturePrivacy = conn.updateProfilePicturePrivacy
+  this.updateReadReceiptPrivacy = conn.updateReadReceiptPrivacy
+  this.updateGroupsAddPrivacy = conn.updateGroupsAddPrivacy
+  this.updateDefaultDisappearingMode = conn.updateDefaultDisappearingMode
+  this.getBusinessProfile = conn.getBusinessProfile
+  this.resyncAppState = conn.resyncAppState
+  this.chatModify = conn.chatModify
+  this.groupMetadata = conn.groupMetadata
+  this.groupCreate = conn.groupCreate
+  this.groupLeave = conn.groupLeave
+  this.groupUpdateSubject = conn.groupUpdateSubject
+  this.groupParticipantsUpdate = conn.groupParticipantsUpdate
+  this.groupUpdateDescription = conn.groupUpdateDescription
+  this.groupInviteCode = conn.groupInviteCode
+  this.groupRevokeInvite = conn.groupRevokeInvite
+  this.groupAcceptInvite = conn.groupAcceptInvite
+  this.groupAcceptInviteV4 = conn.groupAcceptInviteV4
+  this.groupGetInviteInfo = conn.groupGetInviteInfo
+  this.groupToggleEphemeral = conn.groupToggleEphemeral
+  this.groupSettingUpdate = conn.groupSettingUpdate
+  this.groupToggleMembershipApprovalMode = conn.groupToggleMembershipApprovalMode
+  this.groupFetchAllParticipating = conn.groupFetchAllParticipating
+  this.getPrivacyToken = conn.getPrivacyToken
+  
 
 		this.opts = new Object(
 			yargs(process.argv.slice(2)).exitProcess(false).parse()
