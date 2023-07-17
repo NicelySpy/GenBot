@@ -61,16 +61,7 @@ export class WhatsappBot {
   this.onWhatsapp = conn.onWhatsapp
   this.fetchBlocklist = conn.fetchBlocklist
   this.fetchStatus = conn.fetchStatus
-  this.updateProfilePicture = conn.updateProfilePicture
-  this.removeProfilePicture = conn.removeProfilePicture
-  this.updateProfileStatus = conn.updateProfileStatus
-  this.updateProfileName = conn.updateProfileName
   this.updateBlockStatus = conn.updateBlockStatus
-  this.updateLastSeenPrivacy = conn.updateLastSeenPrivacy
-  this.updateOnlinePrivacy = conn.updateLastSeenPrivacy
-  this.updateProfilePicturePrivacy = conn.updateProfilePicturePrivacy
-  this.updateReadReceiptPrivacy = conn.updateReadReceiptPrivacy
-  this.updateGroupsAddPrivacy = conn.updateGroupsAddPrivacy
   this.updateDefaultDisappearingMode = conn.updateDefaultDisappearingMode
   this.getBusinessProfile = conn.getBusinessProfile
   this.resyncAppState = conn.resyncAppState
@@ -109,6 +100,23 @@ export class WhatsappBot {
   this.productCreate = conn.productCreate
   this.productDelete = conn.productDelete
   this.productUpdate = conn.productUpdate
+
+  this.profile = {
+    updatePicture: conn.updateProfilePicture,
+    removePicture: conn.removeProfilePicture,
+    updateStatus: conn.updateProfileStatus,
+    updateName: conn.updateProfileName,
+    updatePrivacy: {
+      lastSeen: conn.updateLastSeenPrivacy,
+      online: conn.updateLastSeenPrivacy,
+      profilePicture: conn.updateProfilePicturePrivacy,
+      readReceipt: conn.updateReadReceiptPrivacy,
+      groupsAdd: conn.updateGroupsAddPrivacy
+    }
+  }
+  this.group = {
+  
+  }
 
 		this.opts = new Object(
 			yargs(process.argv.slice(2)).exitProcess(false).parse()
