@@ -57,7 +57,6 @@ export class WhatsappBot {
   this.appPatch = conn.appPatch
   this.sendPresenceUpdate = conn.sendPresenceUpdate
   this.presenceSubscribe = conn.presenceSubscribe
-  this.profilePictureUrl = conn.profilePictureUrl
   this.onWhatsapp = conn.onWhatsapp
   this.fetchBlocklist = conn.fetchBlocklist
   this.fetchStatus = conn.fetchStatus
@@ -66,21 +65,7 @@ export class WhatsappBot {
   this.getBusinessProfile = conn.getBusinessProfile
   this.resyncAppState = conn.resyncAppState
   this.chatModify = conn.chatModify
-  this.groupMetadata = conn.groupMetadata
-  this.groupCreate = conn.groupCreate
-  this.groupLeave = conn.groupLeave
-  this.groupUpdateSubject = conn.groupUpdateSubject
-  this.groupParticipantsUpdate = conn.groupParticipantsUpdate
-  this.groupUpdateDescription = conn.groupUpdateDescription
-  this.groupInviteCode = conn.groupInviteCode
-  this.groupRevokeInvite = conn.groupRevokeInvite
-  this.groupAcceptInvite = conn.groupAcceptInvite
-  this.groupAcceptInviteV4 = conn.groupAcceptInviteV4
-  this.groupGetInviteInfo = conn.groupGetInviteInfo
-  this.groupToggleEphemeral = conn.groupToggleEphemeral
-  this.groupSettingUpdate = conn.groupSettingUpdate
-  this.groupToggleMembershipApprovalMode = conn.groupToggleMembershipApprovalMode
-  this.groupFetchAllParticipating = conn.groupFetchAllParticipating
+conn.groupFetchAllParticipating
   this.getPrivacyToken = conn.getPrivacyToken
   this.assertSession = conn.assertSession
   this.relayMessage = conn.relayMessage
@@ -106,20 +91,35 @@ export class WhatsappBot {
     removePicture: conn.removeProfilePicture,
     updateStatus: conn.updateProfileStatus,
     updateName: conn.updateProfileName,
-    updatePrivacy: {
-      lastSeen: conn.updateLastSeenPrivacy,
-      online: conn.updateLastSeenPrivacy,
-      profilePicture: conn.updateProfilePicturePrivacy,
-      readReceipt: conn.updateReadReceiptPrivacy,
-      groupsAdd: conn.updateGroupsAddPrivacy
+    pictureUrl: conn.profilePictureUrl
+    privacy: {
+      getToken: conn.getPrivacyToken,
+      update: {
+        lastSeen: conn.updateLastSeenPrivacy,
+        online: conn.updateLastSeenPrivacy,
+        profilePicture: conn.updateProfilePicturePrivacy,
+        readReceipt: conn.updateReadReceiptPrivacy,
+        groupsAdd: conn.updateGroupsAddPrivacy
+      },
     }
   }
   this.group = {
     metadata: conn.groupMetadata,
     create: conn.groupCreate,
     leave: conn.groupLeave,
+    participantsUpdate: conn.groupParticipantsUpdate,
+    settingUpdate: conn.groupSettingUpdate,
+    
+    toggle: {
+      ephemeral: conn.groupToggleEphemeral,
+      membershipApprovalMode: conn.groupToggleMembershipApprovalMode
+    }
     invite: {
-      getCode: conn.groupInviteCode
+      getCode: conn.groupInviteCode,
+      revoke: conn.groupRevokeInvite,
+      accept: conn.groupAcceptInvite,
+      acceptV4: conn.groupAcceptInviteV4,
+      getInfo: conn.groupGetInviteInfo
     },
     update: {
       subject: conn.groupUpdateSubject,
