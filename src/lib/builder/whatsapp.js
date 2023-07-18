@@ -52,7 +52,6 @@ export class WhatsappBot {
   this.uploadPreKeysToServerIfRequired = conn.uploadPreKeysToServerIfRequired
   this.waitForConnectionUpdate = conn.waitForConnectionUpdate
   this.processingMutex = conn.processingMutex
-  this.fetchPrivacySetting = conn.fetchPrivacySetting
   this.upsertMessage = conn.upsertMessage
   this.appPatch = conn.appPatch
   this.sendPresenceUpdate = conn.sendPresenceUpdate
@@ -65,8 +64,6 @@ export class WhatsappBot {
   this.getBusinessProfile = conn.getBusinessProfile
   this.resyncAppState = conn.resyncAppState
   this.chatModify = conn.chatModify
-conn.groupFetchAllParticipating
-  this.getPrivacyToken = conn.getPrivacyToken
   this.assertSession = conn.assertSession
   this.relayMessage = conn.relayMessage
   this.sendReceipt = conn.sendReceipt
@@ -91,8 +88,9 @@ conn.groupFetchAllParticipating
     removePicture: conn.removeProfilePicture,
     updateStatus: conn.updateProfileStatus,
     updateName: conn.updateProfileName,
-    pictureUrl: conn.profilePictureUrl
+    pictureUrl: conn.profilePictureUrl,
     privacy: {
+      fetch: conn.fetchPrivacySetting,
       getToken: conn.getPrivacyToken,
       update: {
         lastSeen: conn.updateLastSeenPrivacy,
@@ -109,11 +107,13 @@ conn.groupFetchAllParticipating
     leave: conn.groupLeave,
     participantsUpdate: conn.groupParticipantsUpdate,
     settingUpdate: conn.groupSettingUpdate,
-    
+    fetch: {
+      allParticipating: conn.groupFetchAllParticipating
+    } 
     toggle: {
       ephemeral: conn.groupToggleEphemeral,
       membershipApprovalMode: conn.groupToggleMembershipApprovalMode
-    }
+    },
     invite: {
       getCode: conn.groupInviteCode,
       revoke: conn.groupRevokeInvite,
@@ -125,6 +125,9 @@ conn.groupFetchAllParticipating
       subject: conn.groupUpdateSubject,
       description: conn.groupUpdateDescription
     }
+  }
+  this.fetch = {
+    
   }
 
 		this.opts = new Object(
