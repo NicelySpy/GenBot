@@ -47,7 +47,7 @@ export class WhatsappBot {
   this.sendNode = conn.sendNode
   this.logout = conn.logout
   this.end = conn.end
-  this.onUxpectedError = conn.onUxpectedError
+  this.onUnexpectedError = conn.onUnexpectedError
   this.uploadPreKeys = conn.uploadPreKeys
   this.uploadPreKeysToServerIfRequired = conn.uploadPreKeysToServerIfRequired
   this.waitForConnectionUpdate = conn.waitForConnectionUpdate
@@ -56,17 +56,17 @@ export class WhatsappBot {
   this.appPatch = conn.appPatch
   this.sendPresenceUpdate = conn.sendPresenceUpdate
   this.presenceSubscribe = conn.presenceSubscribe
-  this.onWhatsapp = conn.onWhatsapp
+  this.onWhatsApp = conn.onWhatsApp
   this.resyncAppState = conn.resyncAppState
   this.chatModify = conn.chatModify
-  this.assertSession = conn.assertSession
+  this.assertSessions = conn.assertSessions
   this.relayMessage = conn.relayMessage
   this.sendReceipt = conn.sendReceipt
   this.sendReceipts = conn.sendReceipts
   this.readMessages = conn.readMessages
   this.refreshMediaConn = conn.refreshMediaConn
   this.waUploadToServer = conn.waUploadToServer
-  this.uploadMediaMessage = conn.uploadMediaMessage
+  this.updateMediaMessage = conn.updateMediaMessage
   this.sendMessage = conn.sendMessage
   this.sendMessageAck = conn.sendMessageAck
   this.sendRetryRequest = conn.sendRetryRequest
@@ -79,8 +79,8 @@ export class WhatsappBot {
     updateName: conn.updateProfileName,
     pictureUrl: conn.profilePictureUrl,
     privacy: {
-      fetch: conn.fetchPrivacySetting,
-      getToken: conn.getPrivacyToken,
+      fetch: conn.fetchPrivacySettings,
+      getToken: conn.getPrivacyTokens,
       update: {
         lastSeen: conn.updateLastSeenPrivacy,
         online: conn.updateLastSeenPrivacy,

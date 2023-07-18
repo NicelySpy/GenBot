@@ -10,12 +10,10 @@ export class GenBot extends WhatsappBot {
 
 		//this.conn = this || this.conn
 	}
-	
-  logger() {
+  async logger(...args) {
 		return {
-			info: (...args) => {
-				return console.log(...args);
-			}
+			info: console.log(...args),
+			warn: console.warn(...args)
 		}
 	}
 }

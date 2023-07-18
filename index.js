@@ -10,10 +10,11 @@ let conn = new GenBot({
   auth: state,
 });
 
-conn.conn.ev.on('connection.update', update => {
+conn.ev.on('connection.update', update => {
   const { connection, lastDisconnect, isNewLogin } = update;  
   if (isNewLogin) conn.isInit = true;  
 });
+conn.logger('test').warn
 console.log(conn)
 //conn.logger().info('p bang')
 /*conn.logger().warn('ppp')
