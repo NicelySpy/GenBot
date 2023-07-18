@@ -712,7 +712,7 @@ async decodeJid(jid) {
      if (jid.endsWith("@g.us")) 
        return new Promise(async (resolve) => { 
          v = this.chats[jid] || {}; 
-         if (!(v.name || v.subject)) v = (await this.groupMetadata(jid)) || {}; 
+         if (!(v.name || v.subject)) v = (await this.group.metadata(jid)) || {}; 
          resolve( 
            v.name || 
              v.subject || 
@@ -789,7 +789,7 @@ async decodeJid(jid) {
      ); 
      if (!chat || chat === "status@broadcast") return; 
      const emitGroupUpdate = (update) => { 
-       ev.emit("groups.update", [{ id: chat, ...update }]); 
+       this.ev.emit("groups.update", [{ id: chat, ...update }]); 
      }; 
      switch (m.messageStubType) { 
        case WAMessageStubType.REVOKE: 
@@ -813,7 +813,7 @@ async decodeJid(jid) {
      let chats = this.chats[chat]; 
      if (!chats) chats = this.chats[chat] = { id: chat }; 
      chats.isChats = true; 
-     const metadata = await this.groupMetadata(chat).catch((_) => null); 
+     const metadata = await this.group.metadata(chat).catch((_) => null); 
      if (!metadata) return; 
      chats.subject = metadata.subject; 
      chats.metadata = metadata; 
@@ -921,7 +921,7 @@ async decodeJid(jid) {
          if (isGroup) { 
            if (!chats.subject || !chats.metadata) { 
              metadata = 
-               (await this.groupMetadata(chat).catch((_) => ({}))) || {}; 
+               (await this.group.metadata(chat).catch((_) => ({}))) || {}; 
              if (!chats.subject) chats.subject = metadata.subject || ""; 
              if (!chats.metadata) chats.metadata = metadata; 
            } 
@@ -994,7 +994,7 @@ async decodeJid(jid) {
 
 	 async serializeM(m) {
 		 return (import("./serializeM.js")).smsg(this, m)
-	 }*/
+	 }
 }
 
 Buffer.prototype.toArrayBufferV2 = function toArrayBuffer() {
