@@ -270,7 +270,7 @@ async decodeJid(jid) {
      for (let [number, name] of data) { 
        number = number.replace(/[^0-9]/g, ""); 
        let njid = number + "@s.whatsapp.net"; 
-       let biz = (await this.getBusinessProfile(njid).catch((_) => null)) || {}; 
+       let biz = (await this.business.get.profile(njid).catch((_) => null)) || {}; 
        let vcard = `  
   BEGIN:VCARD  
   VERSION:3.0  
