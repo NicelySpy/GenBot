@@ -57,11 +57,6 @@ export class WhatsappBot {
   this.sendPresenceUpdate = conn.sendPresenceUpdate
   this.presenceSubscribe = conn.presenceSubscribe
   this.onWhatsapp = conn.onWhatsapp
-  this.fetchBlocklist = conn.fetchBlocklist
-  this.fetchStatus = conn.fetchStatus
-  this.updateBlockStatus = conn.updateBlockStatus
-  this.updateDefaultDisappearingMode = conn.updateDefaultDisappearingMode
-  this.getBusinessProfile = conn.getBusinessProfile
   this.resyncAppState = conn.resyncAppState
   this.chatModify = conn.chatModify
   this.assertSession = conn.assertSession
@@ -76,13 +71,7 @@ export class WhatsappBot {
   this.sendMessageAck = conn.sendMessageAck
   this.sendRetryRequest = conn.sendRetryRequest
   this.rejectCall = conn.rejectCall
-  this.getOrderDetails = conn.getOrderDetails
-  this.getCatalog = conn.getCatalog
-  this.getCollections = conn.getCollections
-  this.productCreate = conn.productCreate
-  this.productDelete = conn.productDelete
-  this.productUpdate = conn.productUpdate
-
+  
   this.profile = {
     updatePicture: conn.updateProfilePicture,
     removePicture: conn.removeProfilePicture,
@@ -109,7 +98,7 @@ export class WhatsappBot {
     settingUpdate: conn.groupSettingUpdate,
     fetch: {
       allParticipating: conn.groupFetchAllParticipating
-    } 
+    },
     toggle: {
       ephemeral: conn.groupToggleEphemeral,
       membershipApprovalMode: conn.groupToggleMembershipApprovalMode
@@ -127,7 +116,25 @@ export class WhatsappBot {
     }
   }
   this.fetch = {
-    
+    blocklist: conn.fetchBlocklist,
+    status: conn.fetchStatus
+  }
+  this.update = {
+    blockStatus: conn.updateBlockStatus,
+    defaultDisappearingMode: conn.updateDefaultDisappearingMode
+  }
+  this.business = {
+    get: {
+      profile: conn.getBusinessProfile,
+      orderDetails: conn.getOrderDetails,
+      catalog: conn.getCatalog,
+      collections: conn.getCollections
+    },
+    product: {
+      create: conn.productCreate,
+      delete: conn.productDelete,
+      update: conn.productUpdate
+    }
   }
 
 		this.opts = new Object(
