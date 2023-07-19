@@ -10,6 +10,7 @@ let conn = new GenBot({
   auth: state,
 });
 
+conn.ev.on('creds.update', saveCreds.bind(conn, true));
 conn.ev.on('connection.update', update => {
   const { connection, lastDisconnect, isNewLogin } = update;  
   if (isNewLogin) conn.isInit = true;  
