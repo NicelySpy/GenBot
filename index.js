@@ -1,4 +1,4 @@
-//import { GenBot as Client } from "./src/lib/genbot.js";
+ //import { GenBot as Client } from "./src/lib/genbot.js";
 import { GenBot } from './src/lib/genbot.js'
 import { useMultiFileAuthState } from 'baileys';
 
