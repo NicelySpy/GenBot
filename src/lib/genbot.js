@@ -159,7 +159,7 @@ export class GenBot extends WhatsappBot {
           file: f,
         };
 
-        this.plugin[cmd.command.name] = cmd;
+        this.plugin[cmd._file.file] = cmd;
       }
     }
   }
