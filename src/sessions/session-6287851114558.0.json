@@ -1,0 +1,63 @@
+{
+  "_sessions": {
+    "BcKqXzpxa0WJVUdy6+8EIRtcBio6dhx/29nSfqgy8n1C": {
+      "registrationId": 381037879,
+      "currentRatchet": {
+        "ephemeralKeyPair": {
+          "pubKey": "BWI42EeuwQyquBMuxcnpvi8mPx90apsgRaLEIs8bYlgI",
+          "privKey": "2Ad95T9DZPl1fUn1Du3gdP7kj3MlCK5bcY0FzomGR1k="
+        },
+        "lastRemoteEphemeralKey": "Bc39NY5MRD5eACIUav8AWWM363Nprrs9srsj8Ad7oJtr",
+        "previousCounter": 0,
+        "rootKey": "88fU2mArflrbMyZ6wN9/Ec1oi6t5gL/olU0MlEQJcPw="
+      },
+      "indexInfo": {
+        "baseKey": "BcKqXzpxa0WJVUdy6+8EIRtcBio6dhx/29nSfqgy8n1C",
+        "baseKeyType": 2,
+        "closed": -1,
+        "used": 1689939408413,
+        "created": 1689775910017,
+        "remoteIdentityKey": "BavcbpHfGik0uVALG83x3HMWkylvZMh/6JrTuzO4CJ5A"
+      },
+      "_chains": {
+        "BYOSpA0G3rHa+RHmWQ9/rZL1vrtcjFvdkBxEx8/lC8MH": {
+          "chainKey": { "counter": 1 },
+          "chainType": 2,
+          "messageKeys": {}
+        },
+        "Bc1xW2DeCBQVag1c8YMZ8MWL707Gh8ArHJ4gHJ1Nl9oa": {
+          "chainKey": { "counter": 1 },
+          "chainType": 2,
+          "messageKeys": {}
+        },
+        "BWSC8LvYqOcVdsCe2y+NjPJz4auUEBuAzsQe30o4YGVX": {
+          "chainKey": { "counter": 7 },
+          "chainType": 2,
+          "messageKeys": {}
+        },
+        "BQGqJeZxB5mhRdO8ILQaT+99Fs/UQ9ZtBSJ02TwPLew8": {
+          "chainKey": { "counter": 4 },
+          "chainType": 2,
+          "messageKeys": {}
+        },
+        "Bc39NY5MRD5eACIUav8AWWM363Nprrs9srsj8Ad7oJtr": {
+          "chainKey": {
+            "counter": 0,
+            "key": "7tvS4qCpDFzMVoNGDkalyGYnJio9RUFERXJC9yWJQGI="
+          },
+          "chainType": 2,
+          "messageKeys": {}
+        },
+        "BWI42EeuwQyquBMuxcnpvi8mPx90apsgRaLEIs8bYlgI": {
+          "chainKey": {
+            "counter": 1,
+            "key": "XHFt4EqyAJaG1TvkdU2ApHJYSbQe+zQWfqyvlD7i6g0="
+          },
+          "chainType": 1,
+          "messageKeys": {}
+        }
+      }
+    }
+  },
+  "version": "v1"
+}

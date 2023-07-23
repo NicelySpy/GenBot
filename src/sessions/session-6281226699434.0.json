@@ -1,0 +1,43 @@
+{
+  "_sessions": {
+    "BTazxEWH62PFNgpdgV4WGVnSDD07Fa5ETAUscLq+KEcy": {
+      "registrationId": 1235844637,
+      "currentRatchet": {
+        "ephemeralKeyPair": {
+          "pubKey": "BZ0fATTrUqfRBtoXWjOQGC5a4ZsiUmiSK7isjAdTTZwM",
+          "privKey": "eN/K69aH1xj8LZaLd5M/JuQWlq6Vcofb4Xrul/zEP2w="
+        },
+        "lastRemoteEphemeralKey": "BXF9Ygx1O6LvZkcV8WAhdj/R4GuW6crpTQo9wDk8hqJf",
+        "previousCounter": 0,
+        "rootKey": "v9Ay9ZZ3AHiUPUeoh7MyMmhG1ddTwfSKu0cNbT5O2mw="
+      },
+      "indexInfo": {
+        "baseKey": "BTazxEWH62PFNgpdgV4WGVnSDD07Fa5ETAUscLq+KEcy",
+        "baseKeyType": 2,
+        "closed": -1,
+        "used": 1689807630108,
+        "created": 1689807630108,
+        "remoteIdentityKey": "BUZyX9T7+tPoPfWzxJx34eXjmXAu8zTIqdkS25zONK84"
+      },
+      "_chains": {
+        "BXF9Ygx1O6LvZkcV8WAhdj/R4GuW6crpTQo9wDk8hqJf": {
+          "chainKey": {
+            "counter": 0,
+            "key": "Y2+8ol3Rfwkmt1Ntc1Y/+f5k+5q3qhWos+isNMX856A="
+          },
+          "chainType": 2,
+          "messageKeys": {}
+        },
+        "BZ0fATTrUqfRBtoXWjOQGC5a4ZsiUmiSK7isjAdTTZwM": {
+          "chainKey": {
+            "counter": 1,
+            "key": "8kfUKil0XKiajeUHsrpxOiyEyB21Zs/GTZy65sDefnY="
+          },
+          "chainType": 1,
+          "messageKeys": {}
+        }
+      }
+    }
+  },
+  "version": "v1"
+}

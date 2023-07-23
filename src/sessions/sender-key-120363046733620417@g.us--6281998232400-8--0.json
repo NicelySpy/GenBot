@@ -1,0 +1,14 @@
+[
+  {
+    "senderKeyId": 1256897684,
+    "senderChainKey": {
+      "iteration": 3,
+      "seed": "fsuGZO9vXZZn2MdDMSjvzpwsKqVbgkDAiGhptox6eRI="
+    },
+    "senderSigningKey": {
+      "public": "BdgyqjdsMzzieV2ehYK8us2rXheODUD3Ka8+JbDlPcdC",
+      "private": "qNKZGN520zCbsmiOpiDzsvMXg6xJUkHRScGx/0Ae6Hc="
+    },
+    "senderMessageKeys": []
+  }
+]
