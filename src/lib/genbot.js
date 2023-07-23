@@ -79,35 +79,7 @@ export class GenBot extends WhatsappBot {
         let file = await import(`../Plugins/${dir}/${f}`);
         let cmd = file.default || file;
 
-        if (!cmd.command) cmd.command = {};
-        cmd.command.name = cmd.command.name || f.split(".")[0];
-        cmd.command.description = cmd.command.description || "";
-        cmd.command.aliases = Array.isArray(cmd.command.aliases)
-          ? cmd.command.aliases
-          : [cmd.command.aliases || cmd.command.name];
-        cmd.command.category =
-          (cmd.command.category || dir).toLowerCase() || dir.toLowerCase();
-        cmd.command.help = cmd.command.help || cmd.command.name;
-
-        if (!cmd.command.require) cmd.command.require = {};
-        cmd.command.require.diamond = isNaN(cmd.command.require.diamond)
-          ? 0
-          : Number(cmd.command.require.diamond);
-        cmd.command.require.level = isNaN(cmd.command.require.level)
-          ? 0
-          : Number(cmd.command.require.level);
-        cmd.onlyIf = cmd.onlyIf || {};
-        cmd.expEarning = isNaN(cmd.expEarning) ? 50 : Number(cmd.expEarning);
-        cmd.disabled = typeof cmd.disabled == "boolean" ? cmd.disabled : false;
-
-        cmd.run = typeof cmd.run == "function" ? cmd.run : ({ m }) => m;
-        cmd.runBefore =
-          typeof cmd.runBefore == "function" ? cmd.runBefore : ({ m }) => m;
-        cmd.runAfter =
-          typeof cmd.runAfter == "function" ? cmd.runAfter : ({ m }) => m;
-        cmd.runAll =
-          typeof cmd.runAll == "function" ? cmd.runAll : ({ m }) => m;
-
+        
         cmd._file = {
           dir,
           file: f,
