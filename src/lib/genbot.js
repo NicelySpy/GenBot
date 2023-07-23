@@ -107,15 +107,13 @@ export class GenBot extends WhatsappBot {
           }
 
           if('require' in command) {
-            let { require } = command
-
-            if('diamond' in require) {
-              let { diamond } = require
+            if('diamond' in command.require) {
+              let { diamond } = command.require
               diamond = isNaN(Number(diamond)) ? 0 : Number(diamond)
             }
 
-            if('level' in require) {
-              let { level } = require
+            if('level' in command.require) {
+              let { level } = command.require
               level = isNaN(Number(level)) ? 0 : Number(level)
             }
           }
