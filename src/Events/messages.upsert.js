@@ -11,6 +11,7 @@ export default {
       let m = chatUpdate.messages[chatUpdate.messages.length - 1];
 
       m = conn.smsg(conn, m) || m;
+      if(!m) return;
       let [c, ...args] = m.text
         .toLowerCase()
         .slice(".".length)
@@ -36,7 +37,7 @@ export default {
           if (await plugin.runBefore(m, conn)) continue;
         }
         if (typeof plugin.run !== "function") continue;
-
+        if (plugin.disabled) continue;
         try {
           await plugin.run(m, conn);
         } catch (e) {
