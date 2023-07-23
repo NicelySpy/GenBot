@@ -144,6 +144,7 @@ export class WhatsappBot {
     );
     this.chats = { ...(this.connOpts.chats || {}) };
 
+    if (this.user?.id) this.user.jid = this.decodeJid(this.user.id)
     bind(this);
   }
   async decodeJid(jid) {
@@ -790,7 +791,7 @@ export class WhatsappBot {
   async processMessageStubType(m) {
     if (!m.messageStubType) return;
     const chat = this.decodeJid(
-      m.key.remoteJid || m.message?.senderKeyDistributionMessage?.groupId || ""
+      m.key?.remoteJid || m.message?.senderKeyDistributionMessage?.groupId || ""
     );
     if (!chat || chat === "status@broadcast") return;
     const emitGroupUpdate = (update) => {
@@ -860,7 +861,7 @@ export class WhatsappBot {
             _mtype[1] !== "messageContextInfo" &&
             _mtype[1]) ||
           _mtype[_mtype.length - 1];
-        const chat = this.decodeJid(
+        let chat = this.decodeJid(
           message.key.remoteJid ||
             message.message?.senderKeyDistributionMessage?.groupId ||
             ""
@@ -868,7 +869,7 @@ export class WhatsappBot {
         if (message.message?.[mtype]?.contextInfo?.quotedMessage) {
           let context = message.message[mtype].contextInfo;
           let participant = this.decodeJid(context.participant);
-          const remoteJid = this.decodeJid(context.remoteJid || participant);
+          let remoteJid = this.decodeJid(context.remoteJid || participant);
 
           let quoted = message.message[mtype].contextInfo.quotedMessage;
           if (remoteJid && remoteJid !== "status@broadcast" && quoted) {
