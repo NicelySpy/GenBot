@@ -1,4 +1,5 @@
 import { conn } from "../../index.js";
+import { format } from "util";
 
 export default {
   name: "messages.upsert",
@@ -26,31 +27,31 @@ export default {
         //console.log(plugin)
         if (typeof plugin.runAll === "function") {
           try {
-            await plugin.runAll({ conn, m });
+            await plugin.runAll(m, conn);
           } catch (e) {
             conn.logger.error(e);
           }
         }
         if (typeof plugin.runBefore === "function") {
-          if (await plugin.runBefore({ conn, m })) continue;
+          if (await plugin.runBefore(m, conn)) continue;
         }
         if (typeof plugin.run !== "function") continue;
 
         try {
-          await plugin.run({ conn, m });
+          await plugin.run(m, conn);
         } catch (e) {
           m.error = e;
           conn.logger.error(e);
           if (e) {
             let text = format(e);
-            for (let key of Object.values(global.APIKeys))
-              text = text.replace(new RegExp(key, "g"), "#HIDDEN#");
+            //for (let key of Object.values(global.APIKeys))
+            //  text = text.replace(new RegExp(key, "g"), "#HIDDEN#");
             m.reply(text);
           }
         } finally {
           if (typeof plugin.runAfter == 'function') {
             try {
-              await plugin.runAfter({ conn, m });
+              await plugin.runAfter(m, conn);
             } catch (e) {
               conn.logger.error(e);
             }
