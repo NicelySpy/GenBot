@@ -82,66 +82,82 @@ export class GenBot extends WhatsappBot {
             let { name } = command
             name = name.toString()
           }
+
           if('description' in command) {
             let { description } = command
             description = description.toString()
           }
+
           if('aliases' in command) {
             let { aliases } = command
             aliases = Array.isArray(aliases) ? aliases : [].push(aliases)
           }
+
           if('category' in command) {
             let { category } = command
             category = category.toString()
           }
+
           if('help' in command) {
             let { help } = command
             help = Array.isArray(help) ? help : [].push(help)
           }
+
           if('require' in command) {
             let { require } = command
+
             if('diamond' in require) {
               let { diamond } = require
               diamond = isNaN(Number(diamond)) ? 0 : Number(diamond)
             }
+
             if('level' in require) {
               let { level } = require
               level = isNaN(Number(level)) ? 0 : Number(level)
             }
           }
         }
+
         if('expEarning' in cmd) {
           let { expEarning } = cmd
-          expEarning = isNaN(Number(expEarning)) ? 0 : Number(expEarning)
-        }
+          expEarning = isNaN(Number(expEarning)) ? 50 : Number(expEarning)
+        } else cmd.expEarning = 50
+
         if('onlyIf' in cmd) {
           let { onlyIf } = cmd
           onlyIf = Array.isArray(onlyIf) ? onlyIf : [].push(onlyif)
         }
+
         if('disabled' in cmd) {
           let { disabled } = cmd
           disabled = (typeof disabled === 'boolean') ? disabled : true
         }
+
         if('run' in cmd) {
           let { run } = cmd
           run = (typeof run === 'function') ? run.bind(this) : (m) => m;
         }
+
         if('runAll' in cmd) {
           let { runAll } = cmd
           runAll = (typeof runAll === 'function') ? runAll.bind(this) : (m) => m;
         }
+
         if('runBefore' in cmd) {
           let { runBefore } = cmd
           runBefore = (typeof runBefore === 'function') ? runBefore.bind(this) : (m) => m;
         }
+
         if('runAfter' in cmd) {
           let { runAfter } = cmd
           runAfter = (typeof runAfter === 'function') ? runAfter.bind(this) : (m) => m;
         }
+
         cmd._file = {
           dir,
           file: f,
         };
+
         this.plugin[cmd.command.name] = cmd;
       }
     }
