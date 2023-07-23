@@ -81,7 +81,7 @@ export class GenBot extends WhatsappBot {
 
           if('name' in command) {
             let { name } = command
-            name = name.toString()
+            name = name.toString().toLowerCase().replace(' ', '-')
           }
 
           if('description' in command) {
@@ -91,7 +91,9 @@ export class GenBot extends WhatsappBot {
 
           if('aliases' in command) {
             let { aliases } = command
-            aliases = Array.isArray(aliases) ? aliases : [].push(aliases)
+            aliases = Array.isArray(aliases) ? aliases.forEach(a => {
+              a = a.toString().toLowerCase().replace(' ', '-')
+            }) : [].push(aliases.toString().toLowerCase().replace(' ', '-'))
           }
 
           if('category' in command) {
