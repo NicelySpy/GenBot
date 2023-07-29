@@ -16,8 +16,8 @@ import {
 } from "../myfunction.js";
 import { bind } from "./store.js";
 
-const {
-  default: _makeWaSocket,
+import {
+  makeWASocket,
   makeWALegacySocket,
   proto,
   downloadContentFromMessage,
@@ -27,13 +27,14 @@ const {
   generateWAMessageFromContent,
   WAMessageStubType,
   extractMessageContent,
-} = (await import("baileys")).default;
+} = from '@whiskeysockets/baileys';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export class WhatsappBot {
   constructor(connOpts = {}, opts = {}) {
     let conn = _makeWaSocket(connOpts);
+    for(let v in conn) { this[v] = conn[v] }
     this.connOpts = opts;
     this.type = conn.type;
     this.ws = conn.ws;
