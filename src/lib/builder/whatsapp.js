@@ -719,7 +719,7 @@ export class WhatsappBot {
     if (jid.endsWith("@g.us"))
       return new Promise(async (resolve) => {
         v = this.chats[jid] || {};
-        if (!(v.name || v.subject)) v = (await this.group.metadata(jid)) || {};
+        if (!(v.name || v.subject)) v = (await this.groupMetadata(jid)) || {};
         resolve(
           v.name ||
             v.subject ||
@@ -828,7 +828,7 @@ export class WhatsappBot {
 
   async insertAllGroup() {
     const groups =
-      (await this.group.fetch.allParticipating().catch((_) => null)) || {};
+      (await this.groupFetchAllParticipating().catch((_) => null)) || {};
     for (const group in groups)
       this.chats[group] = {
         ...(this.chats[group] || {}),
