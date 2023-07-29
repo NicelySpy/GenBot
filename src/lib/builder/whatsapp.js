@@ -36,110 +36,6 @@ export class WhatsappBot {
     let conn = _makeWaSocket(connOpts);
     for(let v in conn) { this[v] = conn[v] }
     this.connOpts = opts;
-    this.type = conn.type;
-    this.ws = conn.ws;
-    this.ev = conn.ev;
-    this.authState = conn.authState;
-    this.signalRepository = conn.signalRepository;
-    this.user = conn.user;
-    this.generateMessageTag = conn.generateMessageTag;
-    this.query = conn.query;
-    this.waitForMessage = conn.waitForMessage;
-    this.waitForSocketOpen = conn.waitForSocketOpen;
-    this.sendRawMessage = conn.sendRawMessage;
-    this.sendNode = conn.sendNode;
-    this.logout = conn.logout;
-    this.end = conn.end;
-    this.onUnexpectedError = conn.onUnexpectedError;
-    this.uploadPreKeys = conn.uploadPreKeys;
-    this.uploadPreKeysToServerIfRequired = conn.uploadPreKeysToServerIfRequired;
-    this.waitForConnectionUpdate = conn.waitForConnectionUpdate;
-    this.processingMutex = conn.processingMutex;
-    this.upsertMessage = conn.upsertMessage;
-    this.appPatch = conn.appPatch;
-    this.sendPresenceUpdate = conn.sendPresenceUpdate;
-    this.presenceSubscribe = conn.presenceSubscribe;
-    this.onWhatsApp = conn.onWhatsApp;
-    this.resyncAppState = conn.resyncAppState;
-    this.chatModify = conn.chatModify;
-    this.assertSessions = conn.assertSessions;
-    this.relayMessage = conn.relayMessage;
-    this.sendReceipt = conn.sendReceipt;
-    this.sendReceipts = conn.sendReceipts;
-    this.readMessages = conn.readMessages;
-    this.refreshMediaConn = conn.refreshMediaConn;
-    this.waUploadToServer = conn.waUploadToServer;
-    this.updateMediaMessage = conn.updateMediaMessage;
-    this.sendMessage = conn.sendMessage;
-    this.sendMessageAck = conn.sendMessageAck;
-    this.sendRetryRequest = conn.sendRetryRequest;
-    this.rejectCall = conn.rejectCall;
-
-    this.profile = {
-      updatePicture: conn.updateProfilePicture,
-      removePicture: conn.removeProfilePicture,
-      updateStatus: conn.updateProfileStatus,
-      updateName: conn.updateProfileName,
-      pictureUrl: conn.profilePictureUrl,
-      privacy: {
-        fetch: conn.fetchPrivacySettings,
-        getToken: conn.getPrivacyTokens,
-        update: {
-          lastSeen: conn.updateLastSeenPrivacy,
-          online: conn.updateLastSeenPrivacy,
-          profilePicture: conn.updateProfilePicturePrivacy,
-          readReceipt: conn.updateReadReceiptPrivacy,
-          groupsAdd: conn.updateGroupsAddPrivacy,
-        },
-      },
-    };
-    this.group = {
-      metadata: conn.groupMetadata,
-      create: conn.groupCreate,
-      leave: conn.groupLeave,
-      participantsUpdate: conn.groupParticipantsUpdate,
-      settingUpdate: conn.groupSettingUpdate,
-      fetch: {
-        allParticipating: conn.groupFetchAllParticipating,
-      },
-      toggle: {
-        ephemeral: conn.groupToggleEphemeral,
-        membershipApprovalMode: conn.groupToggleMembershipApprovalMode,
-      },
-      invite: {
-        getCode: conn.groupInviteCode,
-        revoke: conn.groupRevokeInvite,
-        accept: conn.groupAcceptInvite,
-        acceptV4: conn.groupAcceptInviteV4,
-        getInfo: conn.groupGetInviteInfo,
-      },
-      update: {
-        subject: conn.groupUpdateSubject,
-        description: conn.groupUpdateDescription,
-      },
-    };
-    this.fetch = {
-      blocklist: conn.fetchBlocklist,
-      status: conn.fetchStatus,
-    };
-    this.update = {
-      blockStatus: conn.updateBlockStatus,
-      defaultDisappearingMode: conn.updateDefaultDisappearingMode,
-    };
-    this.business = {
-      get: {
-        profile: conn.getBusinessProfile,
-        orderDetails: conn.getOrderDetails,
-        catalog: conn.getCatalog,
-        collections: conn.getCollections,
-      },
-      product: {
-        create: conn.productCreate,
-        delete: conn.productDelete,
-        update: conn.productUpdate,
-      },
-    };
-
     this.opts = new Object(
       yargs(process.argv.slice(2)).exitProcess(false).parse()
     );
@@ -150,7 +46,13 @@ export class WhatsappBot {
   }
   async decodeJid(jid) {
     if (!jid || typeof jid !== "string") return (!nullish(jid) && jid) || null;
-    return jid.decodeJid();
+    if (/:\d+@/gi.test(jid)) {
+      const decode = jidDecode(jid) || {};
+      return (
+        (decode.user && decode.server && decode.user + "@" + decode.server) ||
+        jid
+      ).trim();
+    } else return jid.trim();
   }
 
   async getFile(PATH, saveToFile = false) {
@@ -277,7 +179,7 @@ export class WhatsappBot {
       number = number.replace(/[^0-9]/g, "");
       let njid = number + "@s.whatsapp.net";
       let biz =
-        (await this.business.get.profile(njid).catch((_) => null)) || {};
+        (await this.getBusinessProfile(njid).catch((_) => null)) || {};
       let vcard = `  
   BEGIN:VCARD  
   VERSION:3.0  
@@ -820,7 +722,7 @@ export class WhatsappBot {
     let chats = this.chats[chat];
     if (!chats) chats = this.chats[chat] = { id: chat };
     chats.isChats = true;
-    const metadata = await this.group.metadata(chat).catch((_) => null);
+    const metadata = await this.groupMetadata(chat).catch((_) => null);
     if (!metadata) return;
     chats.subject = metadata.subject;
     chats.metadata = metadata;
@@ -885,7 +787,7 @@ export class WhatsappBot {
               context.mentionedJid ||
               quoted[qMtype].contextInfo.mentionedJid ||
               [];
-            const isGroup = remoteJid?.endsWith("g.us");
+            const isGroup = remoteJid.endsWith("g.us");
             if (isGroup && !participant) participant = remoteJid;
             const qM = {
               key: {
@@ -914,7 +816,7 @@ export class WhatsappBot {
           }
         }
         if (!chat || chat === "status@broadcast") continue;
-        const isGroup = chat?.endsWith("@g.us");
+        const isGroup = chat.endsWith("@g.us");
         let chats = this.chats[chat];
         if (!chats) {
           if (isGroup) await this.insertAllGroup().catch(console.error);
@@ -928,7 +830,7 @@ export class WhatsappBot {
         if (isGroup) {
           if (!chats.subject || !chats.metadata) {
             metadata =
-              (await this.group.metadata(chat).catch((_) => ({}))) || {};
+              (await this.groupMetadata(chat).catch((_) => ({}))) || {};
             if (!chats.subject) chats.subject = metadata.subject || "";
             if (!chats.metadata) chats.metadata = metadata;
           }
@@ -1042,15 +944,6 @@ String.prototype.capitalize = function capitalize() {
 String.prototype.capitalizeV2 = function capitalizeV2() {
   const str = this.split(" ");
   return str.map((v) => v.capitalize()).join(" ");
-};
-String.prototype.decodeJid = function decodeJid() {
-  if (/:\d+@/gi.test(this)) {
-    const decode = jidDecode(this) || {};
-    return (
-      (decode.user && decode.server && decode.user + "@" + decode.server) ||
-      this
-    ).trim();
-  } else return this.trim();
 };
 /**
  * number must be milliseconds
