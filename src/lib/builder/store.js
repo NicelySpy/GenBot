@@ -53,7 +53,7 @@ function bind(conn) {
         chats.isChats = !readOnly;
         if (name) chats[isGroup ? "subject" : "name"] = name;
         if (isGroup) {
-          const metadata = await conn.group.metadata(id).catch((_) => null);
+          const metadata = await conn.groupMetadata(id).catch((_) => null);
           if (name || metadata?.subject)
             chats.subject = name || metadata.subject;
           if (!metadata) continue;
@@ -73,7 +73,7 @@ function bind(conn) {
       if (!(id in conn.chats)) conn.chats[id] = { id };
       let chats = conn.chats[id];
       chats.isChats = true;
-      const groupMetadata = await conn.group.metadata(id).catch((_) => null);
+      const groupMetadata = await conn.groupMetadata(id).catch((_) => null);
       if (!groupMetadata) return;
       chats.subject = groupMetadata.subject;
       chats.metadata = groupMetadata;
@@ -92,7 +92,7 @@ function bind(conn) {
           let chats = conn.chats[id];
           if (!chats) chats = conn.chats[id] = { id };
           chats.isChats = true;
-          const metadata = await conn.group.metadata(id).catch((_) => null);
+          const metadata = await conn.groupMetadata(id).catch((_) => null);
           if (metadata) chats.metadata = metadata;
           if (update.subject || metadata?.subject)
             chats.subject = update.subject || metadata.subject;
