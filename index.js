@@ -1,22 +1,23 @@
 import {
   GenBot,
-  useMultiFileAuthState,
+  useSingleFileAuthState,
   serialize,
   protoType,
   smsg,
-} from "./src/lib/myfunction.js";
+} from "./src/lib";
 import pino from "pino";
+
 serialize();
 protoType();
-
-let authFile = `src/sessions`;
-const { state, saveState, saveCreds } = await useMultiFileAuthState(authFile);
 
 let conn = new GenBot({
   printQRInTerminal: true,
   auth: state,
   logger: pino({ level: "silent" }),
 });
+
+const { state, saveState, saveCreds } = await useSingleFileAuthState('src/session.json', conn.logger);
+
 conn.saveCreds = saveCreds;
 conn.smsg = smsg;
 //export { conn };
