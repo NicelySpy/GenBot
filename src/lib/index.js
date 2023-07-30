@@ -42,7 +42,7 @@ export * from "./builder/whatsapp.js";
 export * from "./builder/store.js";
 export * from "./builder/serializeM.js";
 export * from "./genbot.js";
-export * from "baileys";
+export * from "@whiskeysockets/baileys";
 
 // TypeError: Cannot read properties of null (reading 'user')
 //     at WebMessageInfo.get (file:///home/container/lib/simple.js:888:70)
