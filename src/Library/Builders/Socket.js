@@ -44,4 +44,5 @@ class Socket {
       message: { conversation: fakeText },
       ...options,
     });
-}
+  }
+  
