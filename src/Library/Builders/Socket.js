@@ -3,7 +3,7 @@ let {
   proto,
   jidDecode,
   areJidsSameUser
-}
+} = (await import("@whiskeysockets/baileys")).default
 
 class Socket {
   constructor(options) {
@@ -12,15 +12,15 @@ class Socket {
 
     if(this.user?.id) this.user.jid = this.decodeJid(this.user.id)
   }
-
+  reply = this.sendMessage;
   decodeJid(jid) {
     if(!jid || typeof jid !== "string") return null;
     if(/:\d+@/gi.test(jid) {
-    let { user, server } = jidDecode(jid) || {};
-
-    return (
-      (user && server && user + '@' + server) || jid
-    ).trim();
+      let { user, server } = jidDecode(jid) || {};
+      return (
+        (user && server && user + '@' + server) || jid
+      ).trim();
     } else return jid.trim()
   }
+  
 }
